@@ -16,18 +16,19 @@ class Server {
         this.routes();
     }
     config() {
+        // --- Settings
         this.app.set('port', process.env.PORT || 3000);
-    }
-    routes() {
-        // --- Routes
-        this.app.use('/', index_routes_1.default);
-        this.app.use('/api/games', games_routes_1.default);
         // --- Middlewares
         this.app.use(morgan_1.default('dev'));
         this.app.use(cors_1.default());
         // --- Express middlewares
         this.app.use(express_1.default.json());
         this.app.use(express_1.default.urlencoded({ extended: false }));
+    }
+    routes() {
+        // --- Routes
+        this.app.use('/', index_routes_1.default);
+        this.app.use('/api/games', games_routes_1.default);
     }
     start() {
         this.app.listen(this.app.get('port'), () => {

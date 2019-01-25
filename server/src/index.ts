@@ -17,15 +17,10 @@ class Server {
 	}
 
 	config(): void {
+		
+		// --- Settings
 		this.app.set('port', process.env.PORT || 3000);
-	}
-
-	routes(): void {
-
-		// --- Routes
-		this.app.use('/', indexRoutes);
-		this.app.use('/api/games', gamesRoutes);
-
+		
 		// --- Middlewares
 		this.app.use(morgan('dev'));
 		this.app.use(cors());
@@ -33,6 +28,14 @@ class Server {
 		// --- Express middlewares
 		this.app.use(express.json());
 		this.app.use(express.urlencoded({ extended: false }));
+
+	}
+
+	routes(): void {
+
+		// --- Routes
+		this.app.use('/', indexRoutes);
+		this.app.use('/api/games', gamesRoutes);
 
 	}
 
