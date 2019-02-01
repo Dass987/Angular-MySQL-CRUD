@@ -42,7 +42,11 @@ class GamesController {
     }
     // --- Update a game
     update(request, response) {
-        response.json({ text: 'Updating a game ' + request.params.id });
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = request.params;
+            yield database_1.default.query('UPDATE games SET ? WHERE id = ?', [request.body, id]);
+            response.json({ text: 'Updating a game ' + request.params.id });
+        });
     }
     // --- Delete a game
     delete(request, response) {
